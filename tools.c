@@ -70,7 +70,11 @@ Content read_file(char filename[]) {
     fseek(f, 0, SEEK_SET);
     c.bytes = malloc(c.size);
     if (c.bytes == NULL) error(1, "Malloc failed!");
-    fread(c.bytes, c.size, 1, f);
++// switch off compiler warning - JUST THIS ONCE!
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wunused-result"
+     fread(c.bytes, c.size, 1, f);
++#pragma GCC diagnostic pop
     fclose(f);
     return c;
 }
